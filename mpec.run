@@ -1,0 +1,9 @@
+model mpec.mod;
+data mpec.dat;
+
+option solver knitro;
+option presolve 1;
+solve;
+
+display d,p,eta,tz[1],g[1], l[1],mc1[1],totd,txt,p[1], rev, primal,producer/1000, avgp, (sum{f in F}ps[f]),iso,pres, primal/1000, cs, consumer, sw,swp;
+display sum {f in F} ps[f];
