@@ -47,7 +47,7 @@ for {i in type}{
 		let sales[i] :=ts[1];
 		let floww[i] := y[1];
 		let consurplus[i] := cs;
-		let psurplus[i] := primal;
+		let psurplus[i] := primal/1000;
 		let prodsurplus[i] := sum{f in F}ps[f];
 		let welfare[i] := sw;
 		let average_price[i] := avgp;
@@ -60,8 +60,8 @@ for {i in type}{
 		let ISO[i] := iso;
 		let lamdap[i] := lambda_up[7];
 		let lamdan[i] := lambda_lo[7];
-		let teta[i] := theta;
-		let swQP[i] := swqp;		
+		#let teta[i] := theta;
+		#let swQP[i] := swqp;		
 
 }
 
@@ -69,7 +69,7 @@ for {i in type}{
 #display welfare;
 #display type, welfare, swQP, csps, ISO, Z, lamdap, lamdan, teta, price, average_price;
 
-display type, welfare, swQP, csps, ISO, Z, lamdap, lamdan, teta, price, average_price;
+display type, welfare, psurplus, prodsurplus, consurplus, csps, ISO, Z, lamdap, lamdan, price, average_price;
 
 #table newtable OUT "odbc" "newtable.xlsx":
 #	[type], L, Z, G, price, demand, sales, ISO, floww, consurplus, prodsurplus, psurplus, welfare, average_price, comp_welfare, totalD, totalX, MC, MBP;
