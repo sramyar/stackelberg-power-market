@@ -1,0 +1,102 @@
+setwd("/home/sepehr/projects/mpec")
+
+library(xlsx)
+
+# for the case of K in [50,150] --> sheetIndex=6
+# for the case of k in [25,120] --> sheetindex = 9
+
+par(family = "serif")
+
+zmpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=3,rowIndex=(2:12)))
+zpc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=3,rowIndex=(1:11)))
+zmp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=3,rowIndex=(1:11)))
+
+x=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=1,rowIndex=(2:12)))
+
+price_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=5,rowIndex=(2:12)))
+price_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=5,rowIndex=(1:11)))
+price_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=5,rowIndex=(1:11)))
+
+aveprice_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=14,rowIndex=(2:12)))
+aveprice_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=18,rowIndex=(1:11)))
+aveprice_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=18,rowIndex=(1:11)))
+
+
+pbenefit_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=11,rowIndex=(2:12)))
+pbenefit_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=15,rowIndex=(1:11)))
+pbenefit_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=15,rowIndex=(1:11)))
+
+producersurplus_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=10,rowIndex=(2:12)))
+producersurplus_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=14,rowIndex=(1:11)))
+producersurplus_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=14,rowIndex=(1:11)))
+
+iso_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=12,rowIndex=(2:12)))
+iso_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=13,rowIndex=(1:11)))
+iso_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=13,rowIndex=(1:11)))
+
+cs_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=9,rowIndex=(2:12)))
+cs_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=12,rowIndex=(1:11)))
+cs_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=12,rowIndex=(1:11)))
+
+sw_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=24,rowIndex=(2:12)))
+sw_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=20,rowIndex=(1:11)))
+sw_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=20,rowIndex=(1:11)))
+
+prosumer_mpec=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=1,colIndex=20,rowIndex=(2:12)))
+prosumer_pc=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=2,colIndex=15,rowIndex=(1:11)))
+prosumer_mp=unlist(read.xlsx("mpec_results.xlsx",sheetIndex=3,colIndex=15,rowIndex=(1:11)))
+
+
+plot(x,zpc, type="l", col="black", pch = 0,lty=1,lwd=2.5, family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Prosumer Sales (+)/Purchase (-) (MW)",font=2, font.lab=2)
+lines(x,zmp, type="l", pch=1, lty=4,lwd=2, col="black")
+lines(x,zmpec, type="l", pch=2, lty=2,lwd=2, col="black")
+abline(col="black",h=0,lty=3)
+legend(95,-40, legend = c("Perfect Competition","Cournot", "Stackelberg"), col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,4,2) , cex=0.89)
+
+plot(x,price_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Price at Prsoumer Node ($/MWh)",font=2, font.lab=2)
+lines(x,price_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,price_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black",lty =3, v=106)
+legend(80,45.5, legend = c("Perfect Competition","Cournot", "Stackelberg"),col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
+
+plot(x,aveprice_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Average Market Price ($/MWh)",font=2, font.lab=2)
+lines(x,aveprice_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,aveprice_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black", lty = 3,v=106)
+legend(80,35.50, legend = c("Perfect Competition","Cournot", "Stackelberg"),col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
+
+plot(x,pbenefit_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Prosumer Benefits (K$)",font=2, font.lab=2)
+lines(x,pbenefit_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,pbenefit_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black",lty =3 ,v=106)
+legend(30,13.7, legend = c("Perfect Competition","Cournot", "Stackelberg"),col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
+
+plot(x,producersurplus_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Producer Surplus (K$)",font=2, font.lab=2)
+lines(x,producersurplus_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,producersurplus_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black",lty = 3, v=106)
+legend(80, 40.6, legend = c("Perfect Competition","Cournot", "Stackelberg"),col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
+
+plot(x,iso_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "ISO Revenue (K$)",font=2, font.lab=2)
+lines(x,iso_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,iso_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black",lty = 3, v=106)
+legend(80, 10, legend = c("Perfect Competition","Cournot", "Stackelberg"),col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
+
+plot(x,cs_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Consumer Surplus (K$)",font=2, font.lab=2)
+lines(x,cs_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,cs_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black",lty = 3, v=106)
+legend(80, 256.1, legend = c("Perfect Competition","Cournot", "Stackelberg"),col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
+
+plot(x,sw_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Social Surplus (K$)",font=2, font.lab=2)
+lines(x,sw_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,sw_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black",lty = 3, v=106)
+legend(80, 305.7, legend = c("Perfect Competition","Cournot", "Stackelberg"),col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
+
+plot(x,prosumer_pc, type="l", col="black",lty=1,lwd=2.5,family = "serif", xlab = "Prosumer's Zero Marginal Cost Renewable Output (MW)", ylab = "Prosumer Surplus (K$)",font=2, font.lab=2)
+lines(x,prosumer_mp, type="l", pch=22, lty=6,lwd=2, col="black")
+lines(x,prosumer_mpec, type="l", pch=22, lty=2,lwd=2, col="black")
+abline(col="black",lty = 3, v=106)
+legend(28,14.2, legend = c("Perfect Competition","Cournot", "Stackelberg"), col=c("black","black","black"),bty = "n",lwd=c(2.5,2.5,2.5), lty=c(1,6,2) , cex=0.89)
